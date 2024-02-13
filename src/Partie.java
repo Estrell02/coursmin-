@@ -1,34 +1,28 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Partie {
-    private ArrayList<Joueur> joueurs;
+    private List<Joueur> joueurs = new ArrayList<>();
     private Paquet paquet;
 
-    public Partie(int nombreDeJoueurs) {
+    public Partie() {
         paquet = new Paquet();
         paquet.melanger();
-        joueurs = new ArrayList<>();
-
-        for (int i = 0; i < nombreDeJoueurs; i++) {
-            joueurs.add(new Joueur("Joueur " + (i + 1)));
-        }
     }
 
-    public void distribuerCartes(int nombreDeCartesParJoueur) {
+    public void ajouterJoueur(Joueur joueur) {
+        joueurs.add(joueur);
+    }
+
+    public void distribuerCartes() {
         for (Joueur joueur : joueurs) {
-            for (int i = 0; i < nombreDeCartesParJoueur; i++) {
-                if (!paquet.estVide()) {
-                    joueur.recevoirCarte(paquet.piocher());
-                } else {
-
-                }
-            }
+            joueur.recevoirCartes(paquet.distribuer(5));
         }
     }
 
+    // Initialiser et jouer la partie
     public void jouer() {
-
-        distribuerCartes(5);
-
+        distribuerCartes();
+        // Logique pour dérouler la partie et déterminer le gagnant
     }
 }
